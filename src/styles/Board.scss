@@ -1,0 +1,82 @@
+@use "variables";
+
+.board {
+  color: white;
+  background-color: rgb(0, 79, 0);
+  border: solid white variables.$border-sm;
+  display: grid;
+  font-weight: 600;
+  gap: 0.2rem;
+  grid-template-areas:
+    "blank1 zeros zeros zeros"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "dozens numbers numbers numbers"
+    "blank2 lines lines lines";
+  height: variables.$upper-height;
+  padding: 0.2rem;
+  width: variables.$board-width;
+}
+
+.board-zeros {
+  background-color: red;
+  display: grid;
+  grid-area: zeros;
+  grid-template-columns: 1fr 1fr;
+}
+
+.board-dozens {
+  background-color: green;
+  display: grid;
+  grid-area: dozens;
+  grid-template-rows: 1fr 1fr 1fr;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.board-dozens-dozen {
+  //transform: rotate(-90deg);
+  border: solid white variables.$border-sm;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.board-lines {
+  background-color: green;
+  box-sizing: border-box;
+  display: grid;
+  grid-area: lines;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.board-lines-line {
+  border: solid white variables.$border-sm;
+  box-sizing: border-box;
+}
+
+.board-numbers {
+  background-color: green;
+  display: grid;
+  grid-area: numbers;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.board-numbers-number {
+  border: solid white variables.$border-sm;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.highlight-bet-zone {
+  // border: solid orange variables.$border-lg;
+  background-color: orange;
+}

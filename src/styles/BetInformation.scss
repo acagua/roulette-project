@@ -1,0 +1,10 @@
+@use "variables";
+
+.bet-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: solid black variables.$border-md;
+  width: variables.$total-width;
+  height: variables.$lower-height;
+  background-color: white;
+}

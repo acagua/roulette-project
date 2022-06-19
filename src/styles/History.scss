@@ -1,0 +1,23 @@
+@use "variables";
+
+.history {
+  background-color: white;
+  border: solid white variables.$border-sm;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: variables.$upper-height;
+  padding: 0.2rem;
+  text-align: center;
+  width: variables.$history-width;
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+}
+
+.history-list {
+  padding: 0;
+  height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
