@@ -76,9 +76,23 @@ export const rouletteReducer = (
       };
     }
     case rouletteTypes.REMOVE_LAST_HISTORY_ITEM: {
+      const newHistory = state.history.slice(1);
+      let newZoneCounter = initialState.zoneCounter;
+      newHistory.reverse().map((item) => {
+        newZoneCounter = newZoneCounter.map((zone) => ({
+          ...zone,
+          counter:
+            (zone.type === zoneTypes.LINE &&
+              item.numberInfo.line === zone.id) ||
+            (zone.type === zoneTypes.DOZEN && item.numberInfo.dozen === zone.id)
+              ? 0
+              : zone.counter + 1,
+        }));
+      });
       return {
         ...state,
-        history: state.history.filter((item) => item.id !== action.payload),
+        history: newHistory,
+        zoneCounter: newZoneCounter,
       };
     }
     // case rouletteTypes.SET_BET_ZONE: {
