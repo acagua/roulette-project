@@ -7,17 +7,13 @@ import "../styles/Board.scss";
 import { useSelector } from "react-redux";
 import { IRouletteState } from "../redux/reducers/rouletteReducer";
 import { RootState } from "../redux/reducers";
+import { getMaxZone } from "../utils/getMaxZone";
 
 export const Board = () => {
   const { zoneCounter }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
-
-  const maxZone = zoneCounter.reduce(
-    (zone, maxCounterZone) =>
-      zone.counter > maxCounterZone.counter ? zone : maxCounterZone,
-    zoneCounter[1]
-  );
+  const maxZone = getMaxZone(zoneCounter);
 
   const zeroNumber = numberList[0];
   const doubleZeroNumber = numberList[1];

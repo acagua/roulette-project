@@ -7,7 +7,7 @@ import {
 import { betInformationTypes } from "../types/betInformationTypes";
 import { getBetAmount } from "../../utils/bet";
 
-interface IBetInformationState {
+export interface IBetInformationState {
   betInPlace: boolean;
   betAmount: number;
   totalBet: number;
@@ -40,6 +40,10 @@ const betInformationReducer = (state = initialState, action: any) => {
       };
     }
     case betInformationTypes.BET_LOST: {
+      console.log(
+        "amount: " + getBetAmount(state.round),
+        "round " + state.round
+      );
       return {
         ...state,
         // betInPlace: false, // Cuando se arranca no hay vuelta atrás

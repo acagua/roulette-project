@@ -2,7 +2,7 @@
 
 .history {
   background-color: white;
-  border: solid white variables.$border-sm;
+  border: solid variables.$section-border-color variables.$border-sm;
   font-size: 1.2rem;
   font-weight: 600;
   height: variables.$upper-height;

@@ -17,8 +17,8 @@ export enum linesEnum {
 }
 
 export enum zoneTypes {
-  DOZEN,
-  LINE,
+  DOZEN = 1,
+  LINE = 2,
 }
 
 export interface RouletteNumber {

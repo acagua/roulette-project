@@ -1,5 +1,4 @@
 // TYPES
-import { Action, ActionCreator } from "redux";
 import {
   RouletteNumber,
   dozensEnum,
@@ -8,17 +7,12 @@ import {
 } from "../../utils/board";
 import rouletteTypes from "../types/rouletteTypes";
 
-// enum rouletteState {
-//   PLAYING,
-//   BETTING
-// }
-
 interface IHistory {
   id: number;
   numberInfo: RouletteNumber;
 }
 
-interface IZone {
+export interface IZone {
   id: dozensEnum | linesEnum;
   // name: string,
   type: zoneTypes;
@@ -26,21 +20,17 @@ interface IZone {
 }
 
 export interface IRouletteState {
-  // state: rouletteState,
   historyId: number;
   history: IHistory[];
-  // betZone: IZone;
   betRound: number; //TODO betSize type?
   zoneCounter: IZone[];
 }
 
 // INITIAL STATE
 const initialState: IRouletteState = {
-  // state: rouletteState,
   historyId: 0,
   history: [],
-  // betZone: { id: dozensEnum.THIRD_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
-  betRound: 0, //TODO betSize type?
+  betRound: 0,
   zoneCounter: [
     { id: dozensEnum.FIRST_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
     { id: dozensEnum.SECOND_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
@@ -95,17 +85,6 @@ export const rouletteReducer = (
         zoneCounter: newZoneCounter,
       };
     }
-    // case rouletteTypes.SET_BET_ZONE: {
-    //   const maxBetZone = state.zoneCounter.reduce(
-    //     (zone, maxCounterZone) =>
-    //       zone.counter > maxCounterZone.counter ? zone : maxCounterZone,
-    //     state.betZone
-    //   );
-    //   return {
-    //     ...state,
-    //     betZone: maxBetZone,
-    //   };
-    // }
     case rouletteTypes.CLEAN_ALL: {
       return initialState;
     }

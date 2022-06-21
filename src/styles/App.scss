@@ -3,7 +3,7 @@
 }
 
 .main {
-  background-color: blue;
+  background-color: white;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -20,6 +20,9 @@
 }
 .red-number {
   color: red;
+}
+.orange-number {
+  color: orange;
 }
 
 .black-background-number {
@@ -42,9 +45,32 @@
   grid-column: 1 / 3;
 }
 
+.bold-text {
+  font-weight: 600;
+}
 button {
   border-color: transparent;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   width: 100%;
+  &:disabled {
+    background-color: gray;
+  }
+}
+
+.warning-button {
   background-color: red;
   color: white;
+  &:active {
+    background-color: darkred;
+  }
+}
+
+.ok-button {
+  background-color: green;
+  color: white;
+  &:active {
+    background-color: darkgreen;
+  }
 }

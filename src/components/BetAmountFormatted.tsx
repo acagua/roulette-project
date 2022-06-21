@@ -8,12 +8,12 @@ export const BetAmountFormatted = ({
   const options = {
     style: "currency",
     currency: "USD",
-    maximumSignificantDigits: 1,
+    // maximumSignificantDigits: 1,
   };
   const numberFormat = new Intl.NumberFormat("en-US", options);
-  const formattedAmount = numberFormat.format(amount);
+  const formattedAmount = numberFormat.format(amount).slice(0, -3);
   return (
-    <div>
+    <div className="bet-section-item-center">
       {label}: {formattedAmount}
     </div>
   );

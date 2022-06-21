@@ -27,12 +27,13 @@ export const History = () => {
           End
         </li>
       </ul>
-      {history.length && (
-        <Button
-          Icon={TrashIcon}
-          action={rouletteActions.removeLastHistoryItem()}
-        />
-      )}
+
+      <Button
+        Icon={TrashIcon}
+        actions={[rouletteActions.removeLastHistoryItem()]}
+        disabled={history.length === 0}
+        colorType="warning"
+      />
     </section>
   );
 };

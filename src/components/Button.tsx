@@ -6,31 +6,41 @@ interface ButtonInterface {
   name?: string;
   rows?: number;
   columns?: number;
-  Icon: any;
-  action: AnyAction;
+  Icon?: any;
+  actions: AnyAction[];
+  disabled: boolean;
+  colorType: "warning" | "ok";
+  gif?: string;
 }
 export const Button = ({
   name = "",
   rows = 1,
   columns = 1,
   Icon = null,
-  action,
+  actions,
+  disabled,
+  colorType,
+  gif = "",
 }: ButtonInterface) => {
   useSelector;
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(action);
+    actions.map((action) => {
+      dispatch(action);
+    });
   };
 
   return (
     <button
       data-columns={columns + 1}
       data-rows={rows + 1}
-      className={`col-${columns}`}
+      className={`col-${columns} ${colorType}-button`}
       onClick={handleClick}
+      disabled={disabled}
     >
+      <img src={gif} />
+      {Icon && <Icon fill="white" />}
       {name}
-      {<Icon fill="white" />}
     </button>
   );
 };
