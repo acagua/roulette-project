@@ -8,7 +8,6 @@ import { betInformationTypes } from "../types/betInformationTypes";
 import rouletteTypes from "../types/rouletteTypes";
 
 function* placeBet() {
-  console.log("listening for number result");
   const { zoneCounter } = yield select(getRoulette);
   const betZone = getMaxZone(zoneCounter);
 
