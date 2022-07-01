@@ -1,8 +1,8 @@
 import React from "react";
 import { numberList, dozensEnum, zoneTypes, linesEnum } from "../utils/board";
 import { BoardNumber } from "./BoardNumber";
-import { Dozen } from "./Dozen";
-import { Line } from "./Line";
+import { DozenLine } from "./DozenLine";
+// import { Line } from "./Line";
 import "../styles/Board.scss";
 import { useSelector } from "react-redux";
 import { IRouletteState } from "../redux/reducers/rouletteReducer";
@@ -24,27 +24,10 @@ export const Board = () => {
         <BoardNumber rouletteNumber={doubleZeroNumber} key="00" />
       </div>
       <div className="board-dozens">
-        <Dozen
-          name="1st 12"
-          highlighted={
-            maxZone.type === zoneTypes.DOZEN &&
-            maxZone.id === dozensEnum.FIRST_DOZEN
-          }
-        />
-        <Dozen
-          name="2nd 12"
-          highlighted={
-            maxZone.type === zoneTypes.DOZEN &&
-            maxZone.id === dozensEnum.SECOND_DOZEN
-          }
-        />
-        <Dozen
-          name="3rd 12"
-          highlighted={
-            maxZone.type === zoneTypes.DOZEN &&
-            maxZone.id === dozensEnum.THIRD_DOZEN
-          }
-        />
+        {
+          zoneCounter.filter(zone=>zone.type===zoneTypes.DOZEN).map(zone=> 
+          <DozenLine key={`dozen${zone.id}`} name={zone.name} counter={zone.counter} />)
+        }
       </div>
       <div className="board-numbers">
         {numberList
@@ -57,27 +40,10 @@ export const Board = () => {
           ))}
       </div>
       <div className="board-lines">
-        <Line
-          name="1st Line"
-          highlighted={
-            maxZone.type === zoneTypes.LINE &&
-            maxZone.id === linesEnum.FIRST_LINE
-          }
-        />
-        <Line
-          name="2nd Line"
-          highlighted={
-            maxZone.type === zoneTypes.LINE &&
-            maxZone.id === linesEnum.SECOND_LINE
-          }
-        />
-        <Line
-          name="3rd Line"
-          highlighted={
-            maxZone.type === zoneTypes.LINE &&
-            maxZone.id === linesEnum.THIRD_LINE
-          }
-        />
+      {
+          zoneCounter.filter(zone=>zone.type===zoneTypes.LINE).map(zone=> 
+          <DozenLine key={`line${zone.id}`} name={zone.name} counter={zone.counter} />)
+        }
       </div>
     </section>
   );

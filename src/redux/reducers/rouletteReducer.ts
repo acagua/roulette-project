@@ -14,7 +14,7 @@ interface IHistory {
 
 export interface IZone {
   id: dozensEnum | linesEnum;
-  // name: string,
+  name: string,
   type: zoneTypes;
   counter: number;
 }
@@ -32,12 +32,12 @@ const initialState: IRouletteState = {
   history: [],
   betRound: 0,
   zoneCounter: [
-    { id: dozensEnum.FIRST_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
-    { id: dozensEnum.SECOND_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
-    { id: dozensEnum.THIRD_DOZEN, type: zoneTypes.DOZEN, counter: 0 },
-    { id: linesEnum.FIRST_LINE, type: zoneTypes.LINE, counter: 0 },
-    { id: linesEnum.SECOND_LINE, type: zoneTypes.LINE, counter: 0 },
-    { id: linesEnum.THIRD_LINE, type: zoneTypes.LINE, counter: 0 },
+    { id: dozensEnum.FIRST_DOZEN, name: '1st 12', type: zoneTypes.DOZEN, counter: 0 },
+    { id: dozensEnum.SECOND_DOZEN, name: '2nd 12', type: zoneTypes.DOZEN, counter: 0 },
+    { id: dozensEnum.THIRD_DOZEN, name: '3rd 12', type: zoneTypes.DOZEN, counter: 0 },
+    { id: linesEnum.FIRST_LINE, name: '2 to 1', type: zoneTypes.LINE, counter: 0 },
+    { id: linesEnum.SECOND_LINE, name: '2 to 1', type: zoneTypes.LINE, counter: 0 },
+    { id: linesEnum.THIRD_LINE, name: '2 to 1', type: zoneTypes.LINE, counter: 0 },
   ],
 };
 
