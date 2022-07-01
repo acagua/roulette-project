@@ -118,7 +118,7 @@ export const rouletteReducer = (
     case rouletteTypes.REMOVE_LAST_HISTORY_ITEM: {
       const newHistory = state.history.slice(1);
       let newZoneCounter = initialState.zoneCounter;
-      newHistory.reverse().map((item) => {
+      newHistory.map((item) => {
         newZoneCounter = newZoneCounter.map((zone) => ({
           ...zone,
           counter:
