@@ -14,7 +14,7 @@ export const BetAmountFormatted = ({
   const formattedAmount = numberFormat.format(amount).slice(0, -3);
   return (
     <div className="bet-section-item-center">
-      {label}: {formattedAmount}
+      {label}{formattedAmount}
     </div>
   );
 };

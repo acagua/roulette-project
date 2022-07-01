@@ -35,7 +35,7 @@ export const Button = ({
       data-columns={columns + 1}
       data-rows={rows + 1}
       className={`col-${columns} ${colorType}-button`}
-      onClick={handleClick}
+      onDoubleClick={handleClick}
       disabled={disabled}
     >
       <img src={gif} />

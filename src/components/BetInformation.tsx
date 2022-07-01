@@ -39,20 +39,20 @@ export const BetInformation = () => {
   const roundProfit = getBetProfit(round);
   return (
     <section className="bet-section">
-      <Button
+      {/* <Button
         name={betInPlace ? "" : "Bet"}
         columns={2}
         actions={[betInformationActions.placeBet()]}
         disabled={betInPlace}
         Icon={betInPlace ? LockIcon : null}
         colorType="ok"
-      />
-      <BetNoLandingsCounter noLandings={roundsWithoutLanding} />
-      <BetAmountFormatted label="Profit" amount={totalProfit} />
-      <BetAmountFormatted label="Bet" amount={betAmount} />
-      <BetAmountFormatted label="Round profit" amount={roundProfit} />
-      <BetAmountFormatted label="Total bet" amount={totalBet} />
-      <BetCounter />
+      /> */}
+      {/* <BetNoLandingsCounter noLandings={roundsWithoutLanding} />
+      <BetAmountFormatted label="Profit: " amount={totalProfit} />
+      <BetAmountFormatted label="Bet: " amount={betAmount} />
+      <BetAmountFormatted label="Round profit: " amount={roundProfit} />
+      <BetAmountFormatted label="Total bet: " amount={totalBet} />
+      <BetCounter /> */}
       <Button
         name="Reset all"
         columns={2}

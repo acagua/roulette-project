@@ -26,7 +26,7 @@ export const Board = () => {
       <div className="board-dozens">
         {
           zoneCounter.filter(zone=>zone.type===zoneTypes.DOZEN).map(zone=> 
-          <DozenLine key={`dozen${zone.id}`} name={zone.name} counter={zone.counter} />)
+          <DozenLine key={`dozen${zone.id}`} zone={zone} />)
         }
       </div>
       <div className="board-numbers">
@@ -42,7 +42,7 @@ export const Board = () => {
       <div className="board-lines">
       {
           zoneCounter.filter(zone=>zone.type===zoneTypes.LINE).map(zone=> 
-          <DozenLine key={`line${zone.id}`} name={zone.name} counter={zone.counter} />)
+          <DozenLine key={`line${zone.id}`} zone={zone} />)
         }
       </div>
     </section>
