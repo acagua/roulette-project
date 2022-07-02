@@ -1,9 +1,12 @@
 // TYPES
 import {
   RouletteNumber,
-  dozensEnum,
-  linesEnum,
-  zoneTypes,
+  DozensEnum,
+  LinesEnum,
+  ZoneTypes,
+  LowHighEnum,
+  EvenOddEnum,
+  RedBlackEnum
 } from "../../utils/board";
 import rouletteTypes from "../types/rouletteTypes";
 
@@ -13,9 +16,9 @@ interface IHistory {
 }
 
 export interface IZone {
-  id: dozensEnum | linesEnum;
+  id: DozensEnum | LinesEnum | LowHighEnum | EvenOddEnum | RedBlackEnum;
   name: string;
-  type: zoneTypes;
+  type: ZoneTypes;
   counter: number;
   round: number;
   locked: boolean;
@@ -24,66 +27,120 @@ export interface IZone {
 export interface IRouletteState {
   historyId: number;
   history: IHistory[];
-  betRound: number; //TODO betSize type?
-  zoneCounter: IZone[];
+  zones: IZone[];
 }
 
 // INITIAL STATE
 const initialState: IRouletteState = {
   historyId: 0,
   history: [],
-  betRound: 0,
-  zoneCounter: [
+  zones: [
     {
-      id: dozensEnum.FIRST_DOZEN,
+      id: DozensEnum.FIRST_DOZEN,
       name: "1st 12",
-      type: zoneTypes.DOZEN,
+      type: ZoneTypes.DOZEN,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: dozensEnum.SECOND_DOZEN,
+      id: DozensEnum.SECOND_DOZEN,
       name: "2nd 12",
-      type: zoneTypes.DOZEN,
+      type: ZoneTypes.DOZEN,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: dozensEnum.THIRD_DOZEN,
+      id: DozensEnum.THIRD_DOZEN,
       name: "3rd 12",
-      type: zoneTypes.DOZEN,
+      type: ZoneTypes.DOZEN,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: linesEnum.FIRST_LINE,
+      id: LinesEnum.FIRST_LINE,
       name: "2 to 1",
-      type: zoneTypes.LINE,
+      type: ZoneTypes.LINE,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: linesEnum.SECOND_LINE,
+      id: LinesEnum.SECOND_LINE,
       name: "2 to 1",
-      type: zoneTypes.LINE,
+      type: ZoneTypes.LINE,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: linesEnum.THIRD_LINE,
+      id: LinesEnum.THIRD_LINE,
       name: "2 to 1",
-      type: zoneTypes.LINE,
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LowHighEnum.LOW,
+      name: "1-18",
+      type: ZoneTypes.LOW_HIGH,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: EvenOddEnum.EVEN,
+      name: "Even",
+      type: ZoneTypes.EVEN_ODD,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: RedBlackEnum.RED,
+      name: "Red",
+      type: ZoneTypes.RED_BLACK,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: RedBlackEnum.BLACK,
+      name: "Black",
+      type: ZoneTypes.RED_BLACK,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: EvenOddEnum.ODD,
+      name: "Odd",
+      type: ZoneTypes.EVEN_ODD,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LowHighEnum.HIGH,
+      name: "19-36",
+      type: ZoneTypes.LOW_HIGH,
       counter: 0,
       round: 0,
       locked: false,
     },
   ],
 };
+
+const hit = (zone: IZone, payload: RouletteNumber) =>{
+  return (zone.type === ZoneTypes.LINE && payload.line === zone.id) ||
+   (zone.type === ZoneTypes.DOZEN && payload.dozen === zone.id) ||
+   (zone.type === ZoneTypes.EVEN_ODD && payload.evenOdd === zone.id) ||
+   (zone.type === ZoneTypes.RED_BLACK && payload.redBlack === zone.id) ||
+   (zone.type === ZoneTypes.LOW_HIGH && payload.lowHigh === zone.id);
+ }
 
 // REDUCER
 export const rouletteReducer = (
@@ -92,13 +149,10 @@ export const rouletteReducer = (
 ) => {
   switch (action.type) {
     case rouletteTypes.ADD_HISTORY_ITEM: {
-      const hit = (zone: IZone) =>
-        (zone.type === zoneTypes.LINE && action.payload.line === zone.id) ||
-        (zone.type === zoneTypes.DOZEN && action.payload.dozen === zone.id);
 
       const round = (zone: IZone) => {
         if (!zone.locked) return zone.round;
-        return hit(zone) ? 0 : ++zone.round;
+        return hit(zone, action.payload) ? 0 : ++zone.round;
       };
       return {
         ...state,
@@ -107,38 +161,34 @@ export const rouletteReducer = (
           { id: state.historyId, numberInfo: action.payload },
           ...state.history,
         ],
-        zoneCounter: state.zoneCounter.map((zone) => ({
+        zones: state.zones.map((zone) => ({
           ...zone,
-          counter: hit(zone) ? 0 : zone.counter + 1,
+          counter: hit(zone, action.payload) ? 0 : zone.counter + 1,
           round: round(zone),
-          locked: zone.locked && hit(zone) ? false : zone.locked,
+          locked: zone.locked && hit(zone, action.payload) ? false : zone.locked,
         })),
       };
     }
     case rouletteTypes.REMOVE_LAST_HISTORY_ITEM: {
       const newHistory = state.history.slice(1);
-      let newZoneCounter = initialState.zoneCounter;
+      let newzones = initialState.zones;
       newHistory.map((item) => {
-        newZoneCounter = newZoneCounter.map((zone) => ({
+        newzones = newzones.map((zone) => ({
           ...zone,
           counter:
-            (zone.type === zoneTypes.LINE &&
-              item.numberInfo.line === zone.id) ||
-            (zone.type === zoneTypes.DOZEN && item.numberInfo.dozen === zone.id)
-              ? 0
-              : zone.counter + 1,
+            hit(zone,item.numberInfo) ? 0 : zone.counter + 1,
         }));
       });
       return {
         ...state,
         history: newHistory,
-        zoneCounter: newZoneCounter,
+        zones: newzones,
       };
     }
     case rouletteTypes.LOCK_BET_ZONE: {
       return {
         ...state,
-        zoneCounter: state.zoneCounter.map((zone) => ({
+        zones: state.zones.map((zone) => ({
           ...zone,
           locked:
             action.payload.id === zone.id && action.payload.type === zone.type

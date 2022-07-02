@@ -1,32 +1,42 @@
 import React from "react";
-import { numberList, dozensEnum, zoneTypes, linesEnum } from "../utils/board";
+import { numberList, ZoneTypes } from "../utils/board";
 import { BoardNumber } from "./BoardNumber";
-import { DozenLine } from "./DozenLine";
-// import { Line } from "./Line";
+import { BetZone } from "./BetZone";
 import "../styles/Board.scss";
 import { useSelector } from "react-redux";
 import { IRouletteState } from "../redux/reducers/rouletteReducer";
 import { RootState } from "../redux/reducers";
-import { getMaxZone } from "../utils/getMaxZone";
+import { BetType } from "../utils/bet";
 
 export const Board = () => {
-  const { zoneCounter }: IRouletteState = useSelector(
+  const { zones }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
-  const maxZone = getMaxZone(zoneCounter);
 
-  const zeroNumber = numberList[0];
-  const doubleZeroNumber = numberList[1];
+  const oneToOneZones = [ZoneTypes.EVEN_ODD, ZoneTypes.LOW_HIGH, ZoneTypes.RED_BLACK]
+
   return (
     <section className="board">
       <div className="board-zeros">
-        <BoardNumber rouletteNumber={zeroNumber} key="0" />
-        <BoardNumber rouletteNumber={doubleZeroNumber} key="00" />
+        {numberList
+          .filter(({ line }) => !line)
+          .map((rouletteNumber) => (
+            <BoardNumber
+              rouletteNumber={rouletteNumber}
+              key={rouletteNumber.number}
+            />
+          ))}
+      </div>
+      <div className='board-one2one'>
+        {
+          zones.filter(zone=> oneToOneZones.includes(zone.type)).map(zone=> 
+          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_1_TO_1}/>)
+        }
       </div>
       <div className="board-dozens">
         {
-          zoneCounter.filter(zone=>zone.type===zoneTypes.DOZEN).map(zone=> 
-          <DozenLine key={`dozen${zone.id}`} zone={zone} />)
+          zones.filter(zone=>zone.type===ZoneTypes.DOZEN).map(zone=> 
+          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
         }
       </div>
       <div className="board-numbers">
@@ -41,8 +51,8 @@ export const Board = () => {
       </div>
       <div className="board-lines">
       {
-          zoneCounter.filter(zone=>zone.type===zoneTypes.LINE).map(zone=> 
-          <DozenLine key={`line${zone.id}`} zone={zone} />)
+          zones.filter(zone=>zone.type===ZoneTypes.LINE).map(zone=> 
+          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
         }
       </div>
     </section>

@@ -1,5 +1,5 @@
 import rouletteTypes from "../types/rouletteTypes";
-import { RouletteNumber, zoneTypes } from '../../utils/board';
+import { RouletteNumber } from '../../utils/board';
 import { IZone } from "../reducers/rouletteReducer";
 
 const getNextBetZone = () => ({

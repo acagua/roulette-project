@@ -1,4 +1,7 @@
 @use "variables";
+*, *::after, *::before {
+  box-sizing: border-box;
+}
 
 .board {
   color: white;
@@ -8,73 +11,58 @@
   font-weight: 600;
   gap: 0.2rem;
   grid-template-areas:
-    "blank1 zeros zeros zeros"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "dozens numbers numbers numbers"
-    "blank2 lines lines lines";
+    "blank1 blank1 zeros zeros zeros"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "one2one dozens numbers numbers numbers"
+    "blank2 blank2 lines lines lines";
   height: variables.$upper-height;
   padding: 0.2rem;
   width: variables.$board-width;
 }
 
 .board-zeros {
-  background-color: red;
   display: grid;
   grid-area: zeros;
   grid-template-columns: 1fr 1fr;
 }
 
 .board-dozens {
-  background-color: green;
   display: grid;
   grid-area: dozens;
-  grid-template-rows: 1fr 1fr 1fr;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.board-dozens-dozen {
-  //transform: rotate(-90deg);
-  border: solid white variables.$border-sm;
-  box-sizing: border-box;
-  display:flex;
-  flex-direction: column;
 }
 
 .board-lines {
-  background-color: green;
-  box-sizing: border-box;
   display: grid;
   grid-area: lines;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.board-lines-line {
+.board-zone-border {
   border: solid white variables.$border-sm;
-  box-sizing: border-box;
-  display:flex;
-  flex-direction: column;
+}
+
+.board-one2one {
+  display:grid;
+  grid-area: one2one;
 }
 
 .board-numbers {
-  background-color: green;
   display: grid;
   grid-area: numbers;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 .board-numbers-number {
-  border: solid white variables.$border-sm;
   text-align: center;
   font-size: 1.5rem;
 }

@@ -1,9 +1,9 @@
 import { IZone } from "../redux/reducers/rouletteReducer";
 
-export const getMaxZone = (zoneCounter: IZone[]) => {
-  return zoneCounter.reduce(
+export const getMaxZone = (zones: IZone[]) => {
+  return zones.reduce(
     (maxCounterZone, zone) =>
       zone.counter > maxCounterZone.counter ? zone : maxCounterZone,
-    zoneCounter[0]
+    zones[0]
   );
 };

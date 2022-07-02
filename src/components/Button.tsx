@@ -34,7 +34,7 @@ export const Button = ({
     <button
       data-columns={columns + 1}
       data-rows={rows + 1}
-      className={`col-${columns} ${colorType}-button`}
+      className={`${colorType}-button`}
       onDoubleClick={handleClick}
       disabled={disabled}
     >

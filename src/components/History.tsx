@@ -7,11 +7,16 @@ import { IRouletteState } from "../redux/reducers/rouletteReducer";
 import { rouletteActions } from "../redux/actions/rouletteActions";
 import { Button } from "./Button";
 import { ReactComponent as TrashIcon } from "../assets/trash.svg";
+import { colorMapper } from "../utils/board";
 
 export const History = () => {
   const { history }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
+
+
+  
+
   return (
     <section className="history">
       <div className="black-number" key="recent">
@@ -19,7 +24,7 @@ export const History = () => {
       </div>
       <ul className="history-list">
         {history.map(({ numberInfo, id }) => (
-          <li className={`${numberInfo.color}-number`} key={id}>
+          <li className={`${colorMapper[numberInfo.redBlack]}-number`} key={id}>
             {numberInfo.number}
           </li>
         ))}
