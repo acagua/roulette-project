@@ -20,7 +20,7 @@ export const History = () => {
   return (
     <section className="history">
       <div className="black-number" key="recent">
-        History
+        Hit
       </div>
       <ul className="history-list">
         {history.map(({ numberInfo, id }) => (

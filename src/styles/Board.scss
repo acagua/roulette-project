@@ -10,21 +10,23 @@
   display: grid;
   font-weight: 600;
   gap: 0.2rem;
-  grid-template-areas:
-    "blank1 blank1 zeros zeros zeros"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "one2one dozens numbers numbers numbers"
-    "blank2 blank2 columns columns columns";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  // grid-template-areas:
+    //   "blank1 blank1 zeros zeros zeros"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "one2one dozens numbers numbers numbers"
+    //   "blank2 blank2 columns columns columns";
   height: variables.$upper-height;
   padding: 0.2rem;
   width: variables.$board-width;
@@ -32,39 +34,50 @@
 
 .board-zeros {
   display: grid;
-  grid-area: zeros;
+  grid-column: 3 / 6;
   grid-template-columns: 1fr 1fr;
+  // grid-area: zeros;
 }
 
 .board-dozens {
   display: grid;
-  grid-area: dozens;
+  grid-column: 2 / 3;
+  grid-row: 2 / 14;
+  // grid-area: dozens;
 }
 
 .board-columns {
   display: grid;
-  grid-area: columns;
+  grid-column: 3 / 6;
+  grid-row: 14  / 15;
   grid-template-columns: 1fr 1fr 1fr;
+  // grid-area: columns;
 }
 
-.board-zone-border {
-  border: solid white variables.$border-sm;
-}
+
 
 .board-one2one {
   display:grid;
-  grid-area: one2one;
+  grid-column: 1 / 2;
+  grid-row: 2 / 14;
+  // grid-area: one2one;
 }
 
 .board-numbers {
   display: grid;
-  grid-area: numbers;
+  grid-column: 3 / 6;
+  grid-row: 2 / 14;
   grid-template-columns: 1fr 1fr 1fr;
+  // grid-area: numbers;
 }
 
 .board-numbers-number {
   text-align: center;
   font-size: 1.5rem;
+}
+
+.board-zone-border {
+  border: solid white variables.$border-sm;
 }
 
 .risky-bet-zone {

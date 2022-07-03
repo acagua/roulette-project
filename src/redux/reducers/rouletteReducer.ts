@@ -131,15 +131,6 @@ const initialState: IRouletteState = {
       round: 0,
       locked: false,
     },
-    {
-      id: LowHighEnum.HIGH,
-      name: "19-36",
-      type: ZoneTypes.LOW_HIGH,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-
   ],
 };
 
