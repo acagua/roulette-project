@@ -17,10 +17,10 @@ function* placeBet() {
 
   if (cancel) return;
 
-  const { line, dozen } = addItemAction.payload;
+  const { column, dozen } = addItemAction.payload;
   if (
     (betZone.type === ZoneTypes.DOZEN && dozen === betZone.id) ||
-    (betZone.type === ZoneTypes.LINE && line === betZone.id)
+    (betZone.type === ZoneTypes.COLUMN && column === betZone.id)
   ) {
     yield put(betInformationActions.betWon());
   } else {

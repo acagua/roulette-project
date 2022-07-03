@@ -19,7 +19,7 @@ export const Board = () => {
     <section className="board">
       <div className="board-zeros">
         {numberList
-          .filter(({ line }) => !line)
+          .filter(({ column }) => !column)
           .map((rouletteNumber) => (
             <BoardNumber
               rouletteNumber={rouletteNumber}
@@ -41,7 +41,7 @@ export const Board = () => {
       </div>
       <div className="board-numbers">
         {numberList
-          .filter(({ line }) => line)
+          .filter(({ column }) => column)
           .map((rouletteNumber) => (
             <BoardNumber
               rouletteNumber={rouletteNumber}
@@ -49,9 +49,9 @@ export const Board = () => {
             />
           ))}
       </div>
-      <div className="board-lines">
+      <div className="board-columns">
       {
-          zones.filter(zone=>zone.type===ZoneTypes.LINE).map(zone=> 
+          zones.filter(zone=>zone.type===ZoneTypes.COLUMN).map(zone=> 
           <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
         }
       </div>

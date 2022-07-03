@@ -23,19 +23,20 @@ export enum DozensEnum {
   THIRD_DOZEN = 3,
 }
 
-export enum LinesEnum {
+export enum ColumnsEnum {
   ZERO = 0,
-  FIRST_LINE = 1,
-  SECOND_LINE = 2,
-  THIRD_LINE = 3,
+  FIRST_COLUMN = 1,
+  SECOND_COLUMN = 2,
+  THIRD_COLUMN = 3,
 }
 
 export enum ZoneTypes {
   DOZEN = 'dozen',
-  LINE = 'line',
+  COLUMN = 'column',
   LOW_HIGH = 'high-low',
   EVEN_ODD = 'even-odd',
-  RED_BLACK = 'red-black'
+  RED_BLACK = 'red-black',
+
 }
 
 export interface RouletteNumber {
@@ -43,7 +44,7 @@ export interface RouletteNumber {
   redBlack: RedBlackEnum;
   evenOdd:EvenOddEnum;
   lowHigh:LowHighEnum;
-  line: LinesEnum;
+  column: ColumnsEnum;
   dozen: DozensEnum;
 }
 
@@ -60,7 +61,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.GREEN,
     evenOdd:EvenOddEnum.ZERO,
     lowHigh:LowHighEnum.ZERO,
-    line:LinesEnum.ZERO,
+    column:ColumnsEnum.ZERO,
     dozen:DozensEnum.ZERO,
   },
   {
@@ -68,7 +69,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.GREEN,
     evenOdd:EvenOddEnum.ZERO,
     lowHigh:LowHighEnum.ZERO,
-    line:LinesEnum.ZERO,
+    column:ColumnsEnum.ZERO,
     dozen:DozensEnum.ZERO,
   },
   //---------------- First Dozen
@@ -77,7 +78,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
 
   },
@@ -86,7 +87,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -94,7 +95,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -102,7 +103,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -110,7 +111,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -118,7 +119,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -126,7 +127,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -134,7 +135,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -142,7 +143,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -150,7 +151,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -158,7 +159,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   {
@@ -166,7 +167,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
   },
   //---------------- Second Dozen
@@ -175,7 +176,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -183,7 +184,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -191,7 +192,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -199,7 +200,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -207,7 +208,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -215,7 +216,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.LOW,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   //---------------- Mid Board
@@ -224,7 +225,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -232,7 +233,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -240,7 +241,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -248,7 +249,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -256,7 +257,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   {
@@ -264,7 +265,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
   },
   //---------------- Third Dozen
@@ -273,7 +274,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -281,7 +282,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -289,7 +290,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -297,7 +298,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -305,7 +306,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -313,7 +314,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -321,7 +322,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -329,7 +330,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -337,7 +338,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -345,7 +346,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.FIRST_LINE,
+    column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -353,7 +354,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.BLACK,
     evenOdd:EvenOddEnum.ODD,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.SECOND_LINE,
+    column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
   {
@@ -361,7 +362,7 @@ export const numberList: Array<RouletteNumber> = [
     redBlack: RedBlackEnum.RED,
     evenOdd:EvenOddEnum.EVEN,
     lowHigh:LowHighEnum.HIGH,
-    line: LinesEnum.THIRD_LINE,
+    column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
   },
 ];

@@ -24,7 +24,7 @@
     "one2one dozens numbers numbers numbers"
     "one2one dozens numbers numbers numbers"
     "one2one dozens numbers numbers numbers"
-    "blank2 blank2 lines lines lines";
+    "blank2 blank2 columns columns columns";
   height: variables.$upper-height;
   padding: 0.2rem;
   width: variables.$board-width;
@@ -41,9 +41,9 @@
   grid-area: dozens;
 }
 
-.board-lines {
+.board-columns {
   display: grid;
-  grid-area: lines;
+  grid-area: columns;
   grid-template-columns: 1fr 1fr 1fr;
 }
 

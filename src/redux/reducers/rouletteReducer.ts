@@ -2,7 +2,7 @@
 import {
   RouletteNumber,
   DozensEnum,
-  LinesEnum,
+  ColumnsEnum,
   ZoneTypes,
   LowHighEnum,
   EvenOddEnum,
@@ -16,7 +16,7 @@ interface IHistory {
 }
 
 export interface IZone {
-  id: DozensEnum | LinesEnum | LowHighEnum | EvenOddEnum | RedBlackEnum;
+  id: DozensEnum | ColumnsEnum | LowHighEnum | EvenOddEnum | RedBlackEnum;
   name: string;
   type: ZoneTypes;
   counter: number;
@@ -60,25 +60,25 @@ const initialState: IRouletteState = {
       locked: false,
     },
     {
-      id: LinesEnum.FIRST_LINE,
+      id: ColumnsEnum.FIRST_COLUMN,
       name: "2 to 1",
-      type: ZoneTypes.LINE,
+      type: ZoneTypes.COLUMN,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: LinesEnum.SECOND_LINE,
+      id: ColumnsEnum.SECOND_COLUMN,
       name: "2 to 1",
-      type: ZoneTypes.LINE,
+      type: ZoneTypes.COLUMN,
       counter: 0,
       round: 0,
       locked: false,
     },
     {
-      id: LinesEnum.THIRD_LINE,
+      id: ColumnsEnum.THIRD_COLUMN,
       name: "2 to 1",
-      type: ZoneTypes.LINE,
+      type: ZoneTypes.COLUMN,
       counter: 0,
       round: 0,
       locked: false,
@@ -131,11 +131,20 @@ const initialState: IRouletteState = {
       round: 0,
       locked: false,
     },
+    {
+      id: LowHighEnum.HIGH,
+      name: "19-36",
+      type: ZoneTypes.LOW_HIGH,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+
   ],
 };
 
 const hit = (zone: IZone, payload: RouletteNumber) =>{
-  return (zone.type === ZoneTypes.LINE && payload.line === zone.id) ||
+  return (zone.type === ZoneTypes.COLUMN && payload.column === zone.id) ||
    (zone.type === ZoneTypes.DOZEN && payload.dozen === zone.id) ||
    (zone.type === ZoneTypes.EVEN_ODD && payload.evenOdd === zone.id) ||
    (zone.type === ZoneTypes.RED_BLACK && payload.redBlack === zone.id) ||
@@ -170,7 +179,7 @@ export const rouletteReducer = (
       };
     }
     case rouletteTypes.REMOVE_LAST_HISTORY_ITEM: {
-      const newHistory = state.history.slice(1);
+      const newHistory = state.history.slice(1).reverse();
       let newzones = initialState.zones;
       newHistory.map((item) => {
         newzones = newzones.map((zone) => ({
@@ -181,7 +190,7 @@ export const rouletteReducer = (
       });
       return {
         ...state,
-        history: newHistory,
+        history: newHistory.reverse(),
         zones: newzones,
       };
     }
