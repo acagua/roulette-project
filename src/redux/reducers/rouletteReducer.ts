@@ -9,6 +9,7 @@ import {
   RedBlackEnum
 } from "../../utils/board";
 import rouletteTypes from "../types/rouletteTypes";
+import { LineEnum } from '../../utils/board';
 
 interface IHistory {
   id: number;
@@ -16,7 +17,7 @@ interface IHistory {
 }
 
 export interface IZone {
-  id: DozensEnum | ColumnsEnum | LowHighEnum | EvenOddEnum | RedBlackEnum;
+  id: DozensEnum | ColumnsEnum | LowHighEnum | EvenOddEnum | RedBlackEnum | LineEnum | number;
   name: string;
   type: ZoneTypes;
   counter: number;
@@ -131,6 +132,102 @@ const initialState: IRouletteState = {
       round: 0,
       locked: false,
     },
+    {
+      id: LineEnum.TOP_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.FIRST_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.SECOND_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.THIRD_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.FOURTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.FIFTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.SIXTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.SEVENTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.EIGHTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.NINTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.TENTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
+    {
+      id: LineEnum.ELEVENTH_LINE,
+      name: "",
+      type: ZoneTypes.LINE,
+      counter: 0,
+      round: 0,
+      locked: false,
+    },
   ],
 };
 
@@ -139,7 +236,8 @@ const hit = (zone: IZone, payload: RouletteNumber) =>{
    (zone.type === ZoneTypes.DOZEN && payload.dozen === zone.id) ||
    (zone.type === ZoneTypes.EVEN_ODD && payload.evenOdd === zone.id) ||
    (zone.type === ZoneTypes.RED_BLACK && payload.redBlack === zone.id) ||
-   (zone.type === ZoneTypes.LOW_HIGH && payload.lowHigh === zone.id);
+   (zone.type === ZoneTypes.LOW_HIGH && payload.lowHigh === zone.id) ||
+   (zone.type === ZoneTypes.LINE && payload.line.includes(zone.id));
  }
 
 // REDUCER

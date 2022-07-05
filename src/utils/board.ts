@@ -32,13 +32,28 @@ export enum ColumnsEnum {
   THIRD_COLUMN = 3,
 }
 
+export enum LineEnum {
+  TOP_LINE = 1,
+  FIRST_LINE = 2,
+  SECOND_LINE = 3,
+  THIRD_LINE = 4,
+  FOURTH_LINE = 5,
+  FIFTH_LINE = 6,
+  SIXTH_LINE = 7,
+  SEVENTH_LINE = 8,
+  EIGHTH_LINE = 9,
+  NINTH_LINE = 10,
+  TENTH_LINE = 11,
+  ELEVENTH_LINE = 12,
+}
+
 export enum ZoneTypes {
   DOZEN = 'dozen',
   COLUMN = 'column',
   LOW_HIGH = 'high-low',
   EVEN_ODD = 'even-odd',
   RED_BLACK = 'red-black',
-
+  LINE = 'line'
 }
 
 export interface RouletteNumber {
@@ -48,6 +63,7 @@ export interface RouletteNumber {
   lowHigh:LowHighEnum;
   column: ColumnsEnum;
   dozen: DozensEnum;
+  line: LineEnum[];
 }
 
 export const colorMapper = {
@@ -70,9 +86,25 @@ const oneToOneBackgroundMapper:BackgroundMapper= {
 const twoToOneBackgroundMapper:BackgroundMapper = {
   4: 'risky-bet-zone',
   5: 'risky-bet-zone',
-  6: 'medium-bet-zone',
+  6: 'risky-bet-zone',
   7: 'medium-bet-zone',
-  8: 'conservative-bet-zone',
+  8: 'medium-bet-zone',
+  9: 'medium-bet-zone',
+  10: 'conservative-bet-zone',
+}
+
+const fiveToOneBackgroundMapper:BackgroundMapper = {
+  14: 'risky-bet-zone',
+  15: 'risky-bet-zone',
+  16: 'risky-bet-zone',
+  17: 'risky-bet-zone',
+  18: 'risky-bet-zone',
+  19: 'medium-bet-zone',
+  20: 'medium-bet-zone',
+  21: 'medium-bet-zone',
+  22: 'medium-bet-zone',
+  23: 'medium-bet-zone',
+  24: 'conservative-bet-zone',
 }
 
 export const getHighlightStyle = (locked:boolean, counter: number, betType: BetType):string => {
@@ -83,9 +115,14 @@ export const getHighlightStyle = (locked:boolean, counter: number, betType: BetT
 
   if(betType === BetType.BET_2_TO_1){
     mapper = twoToOneBackgroundMapper;
-    max = 8;
+    max = 10;
     if(counter < 4) return '';
   } 
+  if( betType === BetType.BET_5_TO_1){
+    mapper = fiveToOneBackgroundMapper;
+    max = 24;
+    if(counter < 14) return '';
+  }
 
   return mapper[Math.min(counter,max)];
 }
@@ -99,6 +136,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.ZERO,
     column:ColumnsEnum.ZERO,
     dozen:DozensEnum.ZERO,
+    line:[LineEnum.TOP_LINE],
   },
   {
     number: "00",
@@ -107,6 +145,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.ZERO,
     column:ColumnsEnum.ZERO,
     dozen:DozensEnum.ZERO,
+    line:[LineEnum.TOP_LINE],
   },
   //---------------- First Dozen
   {
@@ -116,6 +155,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.TOP_LINE, LineEnum.FIRST_LINE],
 
   },
   {
@@ -125,6 +165,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.TOP_LINE, LineEnum.FIRST_LINE],
   },
   {
     number: "3",
@@ -133,6 +174,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.TOP_LINE, LineEnum.FIRST_LINE],
   },
   {
     number: "4",
@@ -141,6 +183,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.FIRST_LINE, LineEnum.SECOND_LINE],
   },
   {
     number: "5",
@@ -149,6 +192,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.FIRST_LINE, LineEnum.SECOND_LINE],
   },
   {
     number: "6",
@@ -157,6 +201,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.FIRST_LINE, LineEnum.SECOND_LINE],
   },
   {
     number: "7",
@@ -165,6 +210,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.SECOND_LINE, LineEnum.THIRD_LINE],
   },
   {
     number: "8",
@@ -173,6 +219,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.SECOND_LINE, LineEnum.THIRD_LINE]    
   },
   {
     number: "9",
@@ -181,6 +228,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.SECOND_LINE, LineEnum.THIRD_LINE],
   },
   {
     number: "10",
@@ -189,6 +237,8 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.THIRD_LINE, LineEnum.FOURTH_LINE],
+
   },
   {
     number: "11",
@@ -197,6 +247,8 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.THIRD_LINE, LineEnum.FOURTH_LINE],
+
   },
   {
     number: "12",
@@ -205,6 +257,8 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.FIRST_DOZEN,
+    line:[LineEnum.THIRD_LINE, LineEnum.FOURTH_LINE],
+
   },
   //---------------- Second Dozen
   {
@@ -214,6 +268,8 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FOURTH_LINE, LineEnum.FIFTH_LINE],
+
   },
   {
     number: "14",
@@ -222,6 +278,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FOURTH_LINE, LineEnum.FIFTH_LINE],
   },
   {
     number: "15",
@@ -230,6 +287,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FOURTH_LINE, LineEnum.FIFTH_LINE],
   },
   {
     number: "16",
@@ -238,6 +296,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FIFTH_LINE, LineEnum.SIXTH_LINE],
   },
   {
     number: "17",
@@ -246,6 +305,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FIFTH_LINE, LineEnum.SIXTH_LINE],
   },
   {
     number: "18",
@@ -254,6 +314,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.LOW,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.FIFTH_LINE, LineEnum.SIXTH_LINE],
   },
   //---------------- Mid Board
   {
@@ -263,6 +324,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SIXTH_LINE, LineEnum.SEVENTH_LINE],
   },
   {
     number: "20",
@@ -271,6 +333,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SIXTH_LINE, LineEnum.SEVENTH_LINE],
   },
   {
     number: "21",
@@ -279,6 +342,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SIXTH_LINE, LineEnum.SEVENTH_LINE],
   },
   {
     number: "22",
@@ -287,6 +351,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SEVENTH_LINE, LineEnum.EIGHTH_LINE],
   },
   {
     number: "23",
@@ -295,6 +360,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SEVENTH_LINE, LineEnum.EIGHTH_LINE],
   },
   {
     number: "24",
@@ -303,6 +369,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.SECOND_DOZEN,
+    line:[LineEnum.SEVENTH_LINE, LineEnum.EIGHTH_LINE],
   },
   //---------------- Third Dozen
   {
@@ -312,6 +379,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.EIGHTH_LINE, LineEnum.NINTH_LINE],
   },
   {
     number: "26",
@@ -320,6 +388,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.EIGHTH_LINE, LineEnum.NINTH_LINE],
   },
   {
     number: "27",
@@ -328,6 +397,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.EIGHTH_LINE, LineEnum.NINTH_LINE],
   },
   {
     number: "28",
@@ -336,6 +406,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.NINTH_LINE, LineEnum.TENTH_LINE],
   },
   {
     number: "29",
@@ -344,6 +415,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.NINTH_LINE, LineEnum.TENTH_LINE],
   },
   {
     number: "30",
@@ -352,6 +424,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.NINTH_LINE, LineEnum.TENTH_LINE],
   },
   {
     number: "31",
@@ -360,6 +433,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.TENTH_LINE, LineEnum.ELEVENTH_LINE],
   },
   {
     number: "32",
@@ -368,6 +442,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.TENTH_LINE, LineEnum.ELEVENTH_LINE],
   },
   {
     number: "33",
@@ -376,6 +451,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.TENTH_LINE, LineEnum.ELEVENTH_LINE],
   },
   {
     number: "34",
@@ -384,6 +460,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.FIRST_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.ELEVENTH_LINE],
   },
   {
     number: "35",
@@ -392,6 +469,7 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.SECOND_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.ELEVENTH_LINE],
   },
   {
     number: "36",
@@ -400,5 +478,6 @@ export const numberList: Array<RouletteNumber> = [
     lowHigh:LowHighEnum.HIGH,
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
+    line:[LineEnum.ELEVENTH_LINE],
   },
 ];

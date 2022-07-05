@@ -5,8 +5,10 @@ interface BetSize {
 }
 
 export enum BetType {
+  BET_5_TO_1,
   BET_2_TO_1,
-  BET_1_TO_1
+  BET_1_TO_1,
+
 }
 
 export const baseBet = 5000;

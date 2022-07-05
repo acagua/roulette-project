@@ -55,22 +55,10 @@ export const Board = () => {
           <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
         }
       </div>
-      <div className="board-double-streets">
-      {
-          zones.filter(zone=>zone.type===ZoneTypes.COLUMN).map(zone=> 
-          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
-        }
+      <div className="board-line">
         {
-          zones.filter(zone=>zone.type===ZoneTypes.COLUMN).map(zone=> 
-          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
-        }
-        {
-          zones.filter(zone=>zone.type===ZoneTypes.COLUMN).map(zone=> 
-          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
-        }
-        {
-          zones.filter(zone=>zone.type===ZoneTypes.COLUMN).map(zone=> 
-          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_2_TO_1}/>)
+          zones.filter(zone=>zone.type===ZoneTypes.LINE).map(zone=> 
+          <BetZone key={`${zone.type}${zone.id}`} zone={zone} betType={BetType.BET_5_TO_1}/>)
         }
       </div>
     </section>
