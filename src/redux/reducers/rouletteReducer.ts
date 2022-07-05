@@ -6,7 +6,8 @@ import {
   ZoneTypes,
   LowHighEnum,
   EvenOddEnum,
-  RedBlackEnum
+  RedBlackEnum,
+  initialZones
 } from "../../utils/board";
 import rouletteTypes from "../types/rouletteTypes";
 import { LineEnum } from '../../utils/board';
@@ -35,200 +36,11 @@ export interface IRouletteState {
 const initialState: IRouletteState = {
   historyId: 0,
   history: [],
-  zones: [
-    {
-      id: DozensEnum.FIRST_DOZEN,
-      name: "1st 12",
-      type: ZoneTypes.DOZEN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: DozensEnum.SECOND_DOZEN,
-      name: "2nd 12",
-      type: ZoneTypes.DOZEN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: DozensEnum.THIRD_DOZEN,
-      name: "3rd 12",
-      type: ZoneTypes.DOZEN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: ColumnsEnum.FIRST_COLUMN,
-      name: "2 to 1",
-      type: ZoneTypes.COLUMN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: ColumnsEnum.SECOND_COLUMN,
-      name: "2 to 1",
-      type: ZoneTypes.COLUMN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: ColumnsEnum.THIRD_COLUMN,
-      name: "2 to 1",
-      type: ZoneTypes.COLUMN,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LowHighEnum.LOW,
-      name: "1-18",
-      type: ZoneTypes.LOW_HIGH,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: EvenOddEnum.EVEN,
-      name: "Even",
-      type: ZoneTypes.EVEN_ODD,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: RedBlackEnum.RED,
-      name: "Red",
-      type: ZoneTypes.RED_BLACK,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: RedBlackEnum.BLACK,
-      name: "Black",
-      type: ZoneTypes.RED_BLACK,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: EvenOddEnum.ODD,
-      name: "Odd",
-      type: ZoneTypes.EVEN_ODD,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LowHighEnum.HIGH,
-      name: "19-36",
-      type: ZoneTypes.LOW_HIGH,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.TOP_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.FIRST_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.SECOND_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.THIRD_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.FOURTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.FIFTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.SIXTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.SEVENTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.EIGHTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.NINTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.TENTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-    {
-      id: LineEnum.ELEVENTH_LINE,
-      name: "",
-      type: ZoneTypes.LINE,
-      counter: 0,
-      round: 0,
-      locked: false,
-    },
-  ],
+  zones: initialZones,
+};
+const round = (zone: IZone, payload: RouletteNumber) => {
+  if (!zone.locked) return zone.round;
+  return hit(zone, payload) ? 0 : ++zone.round;
 };
 
 const hit = (zone: IZone, payload: RouletteNumber) =>{
@@ -248,10 +60,6 @@ export const rouletteReducer = (
   switch (action.type) {
     case rouletteTypes.ADD_HISTORY_ITEM: {
 
-      const round = (zone: IZone) => {
-        if (!zone.locked) return zone.round;
-        return hit(zone, action.payload) ? 0 : ++zone.round;
-      };
       return {
         ...state,
         historyId: state.historyId + 1,
@@ -262,7 +70,7 @@ export const rouletteReducer = (
         zones: state.zones.map((zone) => ({
           ...zone,
           counter: hit(zone, action.payload) ? 0 : zone.counter + 1,
-          round: round(zone),
+          round: round(zone, action.payload),
           locked: zone.locked && hit(zone, action.payload) ? false : zone.locked,
         })),
       };

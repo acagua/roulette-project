@@ -25,8 +25,8 @@ export const BetZone = ({
 
   return (
     <div className={`board-zone-border no-select center-content ${highlightStyle}`} onDoubleClick={handleLockZone} >
-      <div>{zone.name}</div>
-      <div>{`(${zone.counter})`}</div>
+      {/* <div>{zone.name}</div> */}
+      <div>{`${zone.name} ${zone.counter}`}</div>
       <BetAmountFormatted label="" amount={amount} />
     </div>
   );
