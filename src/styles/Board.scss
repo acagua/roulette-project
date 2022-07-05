@@ -5,8 +5,8 @@
 
 .board {
   color: white;
-  background-color: darkgreen;
-  border: solid variables.$section-border-color variables.$border-sm;
+  // background-color: darkgreen;
+  //border: solid variables.$section-border-color variables.$border-sm;
   display: grid;
   font-size: 0.9rem;
   font-weight: 600;
@@ -66,6 +66,9 @@
   border: solid white variables.$border-sm;
 }
 
+.default-bet-zone{
+  background-color:darkgreen;
+}
 .risky-bet-zone {
   background-color: darkred;
 }

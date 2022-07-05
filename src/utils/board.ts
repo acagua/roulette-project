@@ -111,17 +111,17 @@ export const getHighlightStyle = (locked:boolean, counter: number, betType: BetT
   if(locked) return 'locked-bet-zone';
   let mapper = oneToOneBackgroundMapper;
   let max = 7;
-  if(counter < 3) return ''; 
+  if(counter < 3) return 'default-bet-zone'; 
 
   if(betType === BetType.BET_2_TO_1){
     mapper = twoToOneBackgroundMapper;
     max = 10;
-    if(counter < 4) return '';
+    if(counter < 4) return 'default-bet-zone';
   } 
   if( betType === BetType.BET_5_TO_1){
     mapper = fiveToOneBackgroundMapper;
     max = 24;
-    if(counter < 14) return '';
+    if(counter < 14) return 'default-bet-zone';
   }
 
   return mapper[Math.min(counter,max)];

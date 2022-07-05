@@ -3,7 +3,7 @@
 }
 
 .main {
-  background-color: black;
+  // background-color: black;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -25,6 +25,10 @@
 
 .orange-number {
   color: orange;
+}
+
+.blue-background-number {
+  background-color: blue;
 }
 
 .black-background-number {
