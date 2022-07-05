@@ -1,3 +1,5 @@
+import { IZone } from '../redux/reducers/rouletteReducer';
+import { BetType } from './bet';
 export enum LowHighEnum {
   ZERO = 0,
   LOW = 1,
@@ -52,6 +54,40 @@ export const colorMapper = {
   0:'green',
   1:'red',
   2: 'black',
+}
+
+interface BackgroundMapper {
+  [key: number]: string
+}
+const oneToOneBackgroundMapper:BackgroundMapper= {
+  3: 'risky-bet-zone',
+  4: 'risky-bet-zone',
+  5: 'medium-bet-zone',
+  6: 'medium-bet-zone',
+  7: 'conservative-bet-zone',
+}
+
+const twoToOneBackgroundMapper:BackgroundMapper = {
+  4: 'risky-bet-zone',
+  5: 'risky-bet-zone',
+  6: 'medium-bet-zone',
+  7: 'medium-bet-zone',
+  8: 'conservative-bet-zone',
+}
+
+export const getHighlightStyle = (locked:boolean, counter: number, betType: BetType):string => {
+  if(locked) return 'locked-bet-zone';
+  let mapper = oneToOneBackgroundMapper;
+  let max = 7;
+  if(counter < 3) return ''; 
+
+  if(betType === BetType.BET_2_TO_1){
+    mapper = twoToOneBackgroundMapper;
+    max = 8;
+    if(counter < 4) return '';
+  } 
+
+  return mapper[Math.min(counter,max)];
 }
 
 export const numberList: Array<RouletteNumber> = [

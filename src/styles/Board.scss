@@ -12,7 +12,7 @@
   font-weight: 600;
   gap: 0.2rem;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(28, 1fr);
+  grid-template-rows: repeat(29, 1fr);
   height: variables.$upper-height;
   padding: 0.2rem;
   width: variables.$board-width;
@@ -67,7 +67,7 @@
 }
 
 .risky-bet-zone {
-  background-color: red;
+  background-color: darkred;
 }
 
 .medium-bet-zone {
@@ -75,7 +75,7 @@
 }
 
 .conservative-bet-zone {
-  background-color: forestgreen;
+  background-color: darkblue;
 }
 
 .locked-bet-zone {
