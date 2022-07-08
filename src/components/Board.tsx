@@ -3,20 +3,34 @@ import { numberList, ZoneTypes } from "../utils/board";
 import { BoardNumber } from "./BoardNumber";
 import { BetZone } from "./BetZone";
 import "../styles/Board.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRouletteState } from "../redux/reducers/rouletteReducer";
 import { RootState } from "../redux/reducers";
 import { BetType } from "../utils/bet";
+import { ReactComponent as GearIcon } from "../assets/gear.svg";
+import { useState } from 'react';
+import { settingsActions } from "../redux/actions/settingsActions";
+
 
 export const Board = () => {
   const { zones }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
+  const dispatch = useDispatch();
 
   const oneToOneZones = [ZoneTypes.EVEN_ODD, ZoneTypes.LOW_HIGH, ZoneTypes.RED_BLACK]
 
+  const handleShowBoardSettings  = () => {
+    dispatch(settingsActions.changeVisibility());
+  }
   return (
     <section className="board">
+      <div
+        className='board-settings'
+        onClick={ handleShowBoardSettings }
+      >
+        <GearIcon fill="grey" />
+      </div>
       <div className="board-zeros">
         {numberList
           .filter(({ column }) => !column)

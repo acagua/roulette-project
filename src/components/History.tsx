@@ -36,7 +36,6 @@ export const History = () => {
         }
       );
   };
-  console.log(listSent)
 
   return (
     <section className="history">

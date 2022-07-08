@@ -1,6 +1,7 @@
 import { Board } from "./Board";
 import { History } from "./History";
 import { useSearchParams } from 'react-router-dom'
+import { Settings } from "./Settings";
 
 export const Roulette = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -12,6 +13,7 @@ export const Roulette = () => {
       <main className={`main ${backgroundColor}-background-number`}>
         <History />
         <Board />
+        <Settings/>
       </main>
     </>
   );
