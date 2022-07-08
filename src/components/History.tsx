@@ -39,10 +39,10 @@ export const History = () => {
 
   return (
     <section className="history">
-       <form ref={historyRef} id="form" hidden>
+       {/* <form ref={historyRef} id="form" hidden>
           <label htmlFor="list">Values</label>
           <input id="list" type="text" name="message" value={JSON.stringify(history.reverse().map(number=>number.numberInfo.number))} onChange={()=>{}}/>
-        </form>
+        </form> */}
       <div className="black-number" key="recent">
         Hit
       </div>
@@ -64,13 +64,13 @@ export const History = () => {
         colorType="warning"
       />
 
-      <button
+      {/* <button
         className={`ok-button`}
         onDoubleClick={handleSendHistory}
         disabled={(listSent || history.length < 30)}
       >
         <PaperPlaneIcon fill="white" />
-      </button>
+      </button> */}
     </section>
   );
 };
