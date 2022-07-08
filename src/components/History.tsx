@@ -16,7 +16,7 @@ export const History = () => {
   const { history }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
-  const historyRef = useRef();
+  const historyRef = useRef<any>();
   const [listSent, setListSent] = useState(false)
   const handleSendHistory = () => {
     emailjs
