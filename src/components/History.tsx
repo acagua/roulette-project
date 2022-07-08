@@ -10,41 +10,44 @@ import { ReactComponent as TrashIcon } from "../assets/trash.svg";
 import { ReactComponent as PaperPlaneIcon } from "../assets/paperplane.svg";
 import emailjs from "@emailjs/browser";
 import { colorMapper } from "../utils/board";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export const History = () => {
   const { history }: IRouletteState = useSelector(
     (state: RootState) => state.roulette
   );
-  const historyList = useRef();
-
-  const handleSendHistory = (e) => {
-    // e.preventDefault(); // Prevents default refresh by the browser
-    // emailjs
-    //   .sendForm(
-    //     import.meta.env.EMAILJS_SERVICE_ID,
-    //     import.meta.env.EMAILJS_TEMPLATE_ID,
-    //     historyList.current,
-    //     import.meta.env.EMAILJS_PUBLIC_KEY
-    //   )
-    //   .then(
-    //     (result) => {
-    //       alert("Message Sent, We will get back to you shortly");
-    //       console.log("YAAAAS");
-    //     },
-    //     (error) => {
-    //       alert("An error occurred, Please try again");
-    //       console.log("FAAAAAAK");
-    //     }
-    //   );
+  const historyRef = useRef();
+  const [listSent, setListSent] = useState(false)
+  const handleSendHistory = () => {
+    emailjs
+      .sendForm(
+        'service_nvgy92v',
+        'template_ofekvit',
+        historyRef.current,
+        'I7PpmH1IY0IFtZVla',
+      )
+      .then(
+        () => {
+          alert("List Sent!");
+          setListSent(true);
+        },
+        () => {
+          alert("Error....");
+        }
+      );
   };
+  console.log(listSent)
 
   return (
     <section className="history">
+       <form ref={historyRef} id="form" hidden>
+          <label htmlFor="list">Values</label>
+          <input id="list" type="text" name="message" value={JSON.stringify(history.reverse().map(number=>number.numberInfo.number))} onChange={()=>{}}/>
+        </form>
       <div className="black-number" key="recent">
         Hit
       </div>
-      <form ref={historyList} className="history-list">
+      <ul className="history-list">
         {history.map(({ numberInfo, id }) => (
           <li className={`${colorMapper[numberInfo.redBlack]}-number`} key={id}>
             {numberInfo.number}
@@ -53,7 +56,7 @@ export const History = () => {
         <li className="black-number" key="recent">
           End
         </li>
-      </form>
+      </ul>
 
       <Button
         Icon={TrashIcon}
@@ -65,7 +68,7 @@ export const History = () => {
       <button
         className={`ok-button`}
         onDoubleClick={handleSendHistory}
-        disabled={history.length < 30}
+        disabled={(listSent || history.length < 30)}
       >
         <PaperPlaneIcon fill="white" />
       </button>
