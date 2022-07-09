@@ -1,5 +1,5 @@
-
-import settingsTypes from '../types/settingsTypes';
+import { Color } from "react-color";
+import settingsTypes from "../types/settingsTypes";
 
 const changeVisibility = () => ({
   type: settingsTypes.CHANGE_VISIBILITY,
@@ -7,17 +7,17 @@ const changeVisibility = () => ({
 
 const changeBackgroundColor = (color: string) => ({
   type: settingsTypes.CHANGE_BACKGROUND_COLOR,
-  payload: color
+  payload: color,
 });
 
 const changeNumberBaseAmount = (amount: number) => ({
   type: settingsTypes.CHANGE_NUMBER_BASE_AMOUNT,
-  payload: amount
+  payload: amount,
 });
 
 const changeZoneBaseAmount = (amount: number) => ({
   type: settingsTypes.CHANGE_ZONE_BASE_AMOUNT,
-  payload: amount
+  payload: amount,
 });
 
 const cleanAll = () => ({

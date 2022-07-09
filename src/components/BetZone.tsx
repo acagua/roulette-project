@@ -1,33 +1,47 @@
-import { useDispatch } from "react-redux";
-import { rouletteActions } from '../redux/actions/rouletteActions';
+import { useDispatch, useSelector } from "react-redux";
+import { rouletteActions } from "../redux/actions/rouletteActions";
+import { RootState } from "../redux/reducers";
 import { IZone } from "../redux/reducers/rouletteReducer";
+import { ISettingsState } from "../redux/reducers/settingsReducer";
 import { betSize, BetType } from "../utils/bet";
-import { getHighlightStyle } from "../utils/board";
+import { getHighlightStyle, ZoneTypes } from "../utils/board";
 import { BetAmountFormatted } from "./BetAmountFormatted";
 
 interface BetZoneProps {
-  zone: IZone
-  betType: BetType
+  zone: IZone;
+  betType: BetType;
 }
 
-export const BetZone = ({
-  zone,
-  betType
-}: BetZoneProps) => {
+export const BetZone = ({ zone, betType }: BetZoneProps) => {
   const dispatch = useDispatch();
 
-  const handleLockZone = ()=>{
-    dispatch(rouletteActions.lockBetZone(zone))
-  }
-  const amount = betSize.find(bet=> (bet.round === zone.round && betType === bet.type) )?.amount||0;
+  const { numberBaseAmount, zoneBaseAmount }: ISettingsState = useSelector(
+    (state: RootState) => state.settings
+  );
 
-  const highlightStyle = getHighlightStyle(zone.locked, zone.counter, betType );
+  const handleLockZone = () => {
+    dispatch(rouletteActions.lockBetZone(zone));
+  };
+
+  const multiplier =
+    betSize.find((bet) => bet.round === zone.round && betType === bet.type)
+      ?.multiplier || 0;
+
+  const baseAmount =
+    zone.type === ZoneTypes.LINE ? numberBaseAmount : zoneBaseAmount;
+
+  const betAmount = baseAmount * multiplier;
+
+  const highlightStyle = getHighlightStyle(zone.locked, zone.counter, betType);
 
   return (
-    <div className={`board-zone-border no-select center-content ${highlightStyle}`} onDoubleClick={handleLockZone} >
+    <div
+      className={`board-zone-border center-content ${highlightStyle}`}
+      onDoubleClick={handleLockZone}
+    >
       {/* <div>{zone.name}</div> */}
       <div>{`${zone.name} ${zone.counter}`}</div>
-      <BetAmountFormatted label="" amount={amount} />
+      <BetAmountFormatted label="" amount={betAmount} />
     </div>
   );
 };
