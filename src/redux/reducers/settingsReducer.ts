@@ -32,6 +32,18 @@ export const settingsReducer = (
         backgroundColor: action.payload,
       };
     }
+    case settingsTypes.CHANGE_ZONE_BASE_AMOUNT: {
+      return {
+        ...state,
+        zoneBaseAmount: action.payload,
+      };
+    }
+    case settingsTypes.CHANGE_NUMBER_BASE_AMOUNT: {
+      return {
+        ...state,
+        numberBaseAmount: action.payload,
+      };
+    }
     case settingsTypes.RESET_TO_DEFAULT: {
       return initialState;
     }

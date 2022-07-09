@@ -1,4 +1,3 @@
-import React from "react";
 import { numberList, ZoneTypes } from "../utils/board";
 import { BoardNumber } from "./BoardNumber";
 import { BetZone } from "./BetZone";
@@ -8,7 +7,6 @@ import { IRouletteState } from "../redux/reducers/rouletteReducer";
 import { RootState } from "../redux/reducers";
 import { BetType } from "../utils/bet";
 import { ReactComponent as GearIcon } from "../assets/gear.svg";
-import { useState } from "react";
 import { settingsActions } from "../redux/actions/settingsActions";
 
 export const Board = () => {

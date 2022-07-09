@@ -16,12 +16,9 @@ export const ColorPicker = () => {
   };
 
   return (
-    <div>
-      <h3>Background Color:</h3>
-      <SliderPicker
-        color={backgroundColor}
-        onChangeComplete={handleColorChange}
-      />
-    </div>
+    <SliderPicker
+      color={backgroundColor}
+      onChangeComplete={handleColorChange}
+    />
   );
 };

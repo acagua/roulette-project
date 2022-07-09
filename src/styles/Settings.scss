@@ -1,0 +1,22 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.close-modal {
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+label {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+input {
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 1px solid black;
+}

@@ -10,14 +10,14 @@ const changeBackgroundColor = (color: string) => ({
   payload: color,
 });
 
-const changeNumberBaseAmount = (amount: number) => ({
+const changeNumberBaseAmount = (baseAmount: number) => ({
   type: settingsTypes.CHANGE_NUMBER_BASE_AMOUNT,
-  payload: amount,
+  payload: baseAmount,
 });
 
-const changeZoneBaseAmount = (amount: number) => ({
+const changeZoneBaseAmount = (baseAmount: number) => ({
   type: settingsTypes.CHANGE_ZONE_BASE_AMOUNT,
-  payload: amount,
+  payload: baseAmount,
 });
 
 const cleanAll = () => ({
