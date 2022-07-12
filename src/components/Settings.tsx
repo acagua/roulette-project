@@ -4,6 +4,7 @@ import { RootState } from "../redux/reducers";
 import { ISettingsState } from "../redux/reducers/settingsReducer";
 import { settingsActions } from "../redux/actions/settingsActions";
 import { ColorPicker } from "./ColorPicker";
+import { SendList } from "./SendList";
 import "../styles/Settings.scss";
 
 Modal.setAppElement("#root");
@@ -58,6 +59,7 @@ export const Settings = () => {
           onChange={handleNumberBaseChange}
         />
       </div>
+      <SendList />
     </Modal>
   );
 };
