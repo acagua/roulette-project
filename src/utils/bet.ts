@@ -10,7 +10,7 @@ export enum BetType {
   BET_1_TO_1,
 }
 
-export const betSize: Array<BetSize> = [
+export const betSize: BetSize[] = [
   {
     round: 1,
     multiplier: 1,

@@ -1,38 +1,100 @@
-import { IZone } from "../redux/reducers/rouletteReducer";
-import { BetType } from "./bet";
-export enum LowHighEnum {
+type ResultType = {
+  totalProfit: number;
+  dozensProfit: number;
+  columnsProfit: number;
+  oneToOneProfit: number;
+  linesProfit: number;
+};
+
+export const allBetsStrategy = (sampleArray: Array<string>): ResultType => {
+  let results = {
+    totalProfit: 0,
+    dozensProfit: 0,
+    columnsProfit: 0,
+    oneToOneProfit: 0,
+    linesProfit: 0,
+  };
+  let zones = initialZones;
+  sampleArray.map((number) => {
+    const numberInfo = getNumberInfo(number);
+    const { column, dozen, evenOdd, lowHigh, redBlack } = numberInfo;
+    zones.map((zone) => {
+      if (hit(zone, numberInfo)) {
+      }
+    });
+  });
+  //   sampleArray.forEach((number) => {});
+  return results;
+};
+
+const getNumberInfo = (id: string): RouletteNumber =>
+  numberList.find((number) => number.number === id) || numberList[1];
+
+const hit = (zone: IZone, number: RouletteNumber) => {
+  return (
+    (zone.type === ZoneTypes.COLUMN && number.column === zone.id) ||
+    (zone.type === ZoneTypes.DOZEN && number.dozen === zone.id) ||
+    (zone.type === ZoneTypes.EVEN_ODD && number.evenOdd === zone.id) ||
+    (zone.type === ZoneTypes.RED_BLACK && number.redBlack === zone.id) ||
+    (zone.type === ZoneTypes.LOW_HIGH && number.lowHigh === zone.id) ||
+    (zone.type === ZoneTypes.LINE && number.line.includes(zone.id))
+  );
+};
+//----------------------------------------------------------------
+//----------------------------------------------------------------
+//---------------------------DELETE-------------------------------
+//----------------------------------------------------------------
+//----------------------------------------------------------------
+
+interface IZone {
+  id:
+    | DozensEnum
+    | ColumnsEnum
+    | LowHighEnum
+    | EvenOddEnum
+    | RedBlackEnum
+    | LineEnum
+    | number;
+  name: string;
+  type: ZoneTypes;
+  counter: number;
+  round: number;
+  locked: boolean;
+}
+
+enum LowHighEnum {
   ZERO = 0,
   LOW = 1,
   HIGH = 2,
 }
 
-export enum EvenOddEnum {
+enum EvenOddEnum {
   ZERO = 0,
   EVEN = 1,
   ODD = 2,
 }
 
-export enum RedBlackEnum {
+enum RedBlackEnum {
   GREEN = 0,
   RED = 1,
   BLACK = 2,
 }
 
-export enum DozensEnum {
+enum DozensEnum {
   ZERO = 0,
   FIRST_DOZEN = 1,
   SECOND_DOZEN = 2,
   THIRD_DOZEN = 3,
 }
 
-export enum ColumnsEnum {
+enum ColumnsEnum {
   ZERO = 0,
   FIRST_COLUMN = 1,
   SECOND_COLUMN = 2,
   THIRD_COLUMN = 3,
 }
 
-export enum LineEnum {
+enum LineEnum {
   TOP_LINE = 1,
   FIRST_LINE = 2,
   SECOND_LINE = 3,
@@ -47,7 +109,7 @@ export enum LineEnum {
   ELEVENTH_LINE = 12,
 }
 
-export enum ZoneTypes {
+enum ZoneTypes {
   DOZEN = "dozen",
   COLUMN = "column",
   LOW_HIGH = "high-low",
@@ -56,7 +118,7 @@ export enum ZoneTypes {
   LINE = "line",
 }
 
-export interface RouletteNumber {
+interface RouletteNumber {
   number: string;
   redBlack: RedBlackEnum;
   evenOdd: EvenOddEnum;
@@ -66,72 +128,7 @@ export interface RouletteNumber {
   line: LineEnum[];
 }
 
-export const colorMapper = {
-  0: "green",
-  1: "red",
-  2: "black",
-};
-
-interface BackgroundMapper {
-  [key: number]: string;
-}
-const oneToOneBackgroundMapper: BackgroundMapper = {
-  3: "risky-bet-zone",
-  4: "risky-bet-zone",
-  5: "medium-bet-zone",
-  6: "medium-bet-zone",
-  7: "conservative-bet-zone",
-};
-
-const twoToOneBackgroundMapper: BackgroundMapper = {
-  4: "risky-bet-zone",
-  5: "risky-bet-zone",
-  6: "risky-bet-zone",
-  7: "medium-bet-zone",
-  8: "medium-bet-zone",
-  9: "medium-bet-zone",
-  10: "conservative-bet-zone",
-};
-
-const fiveToOneBackgroundMapper: BackgroundMapper = {
-  14: "risky-bet-zone",
-  15: "risky-bet-zone",
-  16: "risky-bet-zone",
-  17: "risky-bet-zone",
-  18: "risky-bet-zone",
-  19: "medium-bet-zone",
-  20: "medium-bet-zone",
-  21: "medium-bet-zone",
-  22: "medium-bet-zone",
-  23: "medium-bet-zone",
-  24: "conservative-bet-zone",
-};
-
-export const getHighlightStyle = (
-  locked: boolean,
-  counter: number,
-  betType: BetType
-): string => {
-  if (locked) return "locked-bet-zone";
-  let mapper = oneToOneBackgroundMapper;
-  let max = 7;
-  if (counter < 3) return "default-bet-zone";
-
-  if (betType === BetType.BET_2_TO_1) {
-    mapper = twoToOneBackgroundMapper;
-    max = 10;
-    if (counter < 4) return "default-bet-zone";
-  }
-  if (betType === BetType.BET_5_TO_1) {
-    mapper = fiveToOneBackgroundMapper;
-    max = 24;
-    if (counter < 14) return "default-bet-zone";
-  }
-
-  return mapper[Math.min(counter, max)];
-};
-
-export const initialZones = [
+const initialZones = [
   {
     id: DozensEnum.FIRST_DOZEN,
     name: "D1",
@@ -326,7 +323,7 @@ export const initialZones = [
   },
 ];
 
-export const numberList: RouletteNumber[] = [
+const numberList: RouletteNumber[] = [
   //---------------- Zeros
   {
     number: "0",
@@ -673,5 +670,258 @@ export const numberList: RouletteNumber[] = [
     column: ColumnsEnum.THIRD_COLUMN,
     dozen: DozensEnum.THIRD_DOZEN,
     line: [LineEnum.ELEVENTH_LINE],
+  },
+];
+
+interface BetSize {
+  round: number;
+  multiplier: number;
+  type: BetType;
+}
+
+enum BetType {
+  BET_5_TO_1,
+  BET_2_TO_1,
+  BET_1_TO_1,
+}
+
+const betSize: BetSize[] = [
+  {
+    round: 1,
+    multiplier: 1,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 2,
+    multiplier: 1,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 3,
+    multiplier: 1,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 4,
+    multiplier: 2,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 5,
+    multiplier: 3,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 6,
+    multiplier: 5,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 7,
+    multiplier: 7,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 8,
+    multiplier: 11,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 9,
+    multiplier: 16,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 10,
+    multiplier: 24,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 11,
+    multiplier: 36,
+    type: BetType.BET_2_TO_1,
+  },
+  {
+    round: 12,
+    multiplier: 54,
+    type: BetType.BET_2_TO_1,
+  },
+  // 1 to 1
+  {
+    round: 1,
+    multiplier: 1,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 2,
+    multiplier: 2,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 3,
+    multiplier: 4,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 4,
+    multiplier: 8,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 5,
+    multiplier: 16,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 6,
+    multiplier: 32,
+    type: BetType.BET_1_TO_1,
+  },
+  {
+    round: 7,
+    multiplier: 64,
+    type: BetType.BET_1_TO_1,
+  },
+  // 5 to 1
+
+  {
+    round: 1,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 2,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 3,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 4,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 5,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 6,
+    multiplier: 1,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 7,
+    multiplier: 2,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 8,
+    multiplier: 2,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 9,
+    multiplier: 2,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 10,
+    multiplier: 3,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 11,
+    multiplier: 3,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 12,
+    multiplier: 4,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 13,
+    multiplier: 5,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 14,
+    multiplier: 6,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 15,
+    multiplier: 7,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 16,
+    multiplier: 8,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 17,
+    multiplier: 10,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 18,
+    multiplier: 12,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 19,
+    multiplier: 14,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 20,
+    multiplier: 17,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 21,
+    multiplier: 21,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 22,
+    multiplier: 25,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 23,
+    multiplier: 30,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 24,
+    multiplier: 36,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 25,
+    multiplier: 43,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 26,
+    multiplier: 52,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 27,
+    multiplier: 62,
+    type: BetType.BET_5_TO_1,
+  },
+  {
+    round: 28,
+    multiplier: 74,
+    type: BetType.BET_5_TO_1,
   },
 ];
